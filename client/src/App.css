@@ -1,25 +1,30 @@
+body{
+  background-color: #111;
+}
+
 /*HOME PAGE CSS*/
 
 .App {
-  width: 100vw;
   height: auto;
   display: flex;
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
   flex-direction: column;
+  background-color: #111;
 }
 
 .post {
   width: 450px;
   height: 300px;
-  border-radius: 10px;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   margin-top: 50px;
-  border: 1px solid lightgray;
+  border: 2px solid #f60;
   font-family: Arial, Helvetica, sans-serif;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: #222;
 }
 
 .post:hover {
@@ -28,29 +33,30 @@
 }
 .post .title {
   flex: 20%;
-  border-bottom: 1px solid lightgray;
-  background-color: dodgerblue;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background-color: #f60;
   display: grid;
   place-content: center;
-  color: white;
+  color: #000;
   font-size: 25px;
 }
 
 .post .body {
-  flex: 60%;
+  flex: 65%;
   display: grid;
   place-content: center;
   margin-left: 5%;
   margin-right: 5%;
+  color: #fff
 }
 
 .post .footer {
-  flex: 20%;
-  border-top: 1px solid lightgray;
+  flex: 15%;
   display: flex;
   align-items: center;
   padding-left: 15px;
-  background-color: dodgerblue;
+  background-color: #d40;
   color: white;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -73,7 +79,7 @@
   width: 500px;
   height: auto;
   padding: 20px;
-  border: 5px solid dodgerblue;
+  border: 5px solid #f60;
   border-radius: 5px;
 }
 
@@ -102,14 +108,18 @@
   margin-top: 15px;
   height: 40px;
   border: none;
-  background-color: lightskyblue;
+  background-color: #f60;
   border-radius: 5px;
   color: white;
 }
 
 .formContainer button:hover {
   cursor: pointer;
-  background-color: dodgerblue;
+  background-color: #c30;
+}
+
+label{
+  color: #fff;
 }
 
 span {
