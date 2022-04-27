@@ -12,6 +12,13 @@ const findAll = (req,res) =>{
     })
 }
 
+const findById = (req,res) =>{
+    const id = req.params.id
+    Post.findByPk(id).then(post => {
+        res.send(post)
+    })
+}
+
 const createPost = (req,res) =>{
     Post.create({
         title: req.body.title,
@@ -42,5 +49,6 @@ const deletePost = (req, res) => {
 module.exports={
     findAll,
     createPost,
-    deletePost
+    deletePost,
+    findById
 }
