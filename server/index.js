@@ -1,12 +1,14 @@
 const express = require('express')
 const app = express()
 const db = require('./models')
+const cors = require('cors')
 
 //settings
 app.set('port', process.env.PORT || 8080);
 
 //middleware
 app.use(express.json())
+app.use(cors())
 
 //routes
 const postRoutes = require('./routes/PostRoutes')

@@ -14,7 +14,7 @@ const findAll = (req,res) =>{
 
 const createPost = (req,res) =>{
     Post.create({
-        tittle: req.body.tittle,
+        title: req.body.title,
         postText: req.body.postText,
         username: req.body.username
     }).then(post => {
