@@ -7,6 +7,8 @@ const findAll = (req,res) =>{
         order: sequelize.literal('createdAt DESC')
     }).then(posts => {
         res.send(posts)
+    }).catch(err => {
+        console.log(err)
     })
 }
 

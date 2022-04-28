@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/francogaliotti/SocialMediaJS#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^4.18.0",
     "mysql2": "^2.3.3",
