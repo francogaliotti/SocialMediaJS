@@ -13,6 +13,8 @@ app.use(cors())
 //routes
 const postRoutes = require('./routes/PostRoutes')
 app.use('/posts', postRoutes)
+const commentRoutes = require('./routes/CommentRoutes')
+app.use('/comments', commentRoutes)
 
 db.sequelize.sync().then(() => {
     app.listen(8080, ()=>{

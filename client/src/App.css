@@ -187,3 +187,8 @@ span {
 #individual .body {
   font-size: 25px;
 }
+
+#individual:hover {
+  box-shadow: none;
+  cursor:auto;
+}

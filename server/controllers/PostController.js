@@ -1,10 +1,6 @@
 const express = require('express')
-const app = express()
 const {Post} = require('../models')
-const bodyParser = require('body-parser')
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
 
 const findAll = (req,res) =>{
     Post.findAll().then(posts => {
