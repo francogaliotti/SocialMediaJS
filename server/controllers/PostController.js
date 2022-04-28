@@ -1,9 +1,11 @@
 const express = require('express')
-const {Post} = require('../models')
+const {Post, sequelize} = require('../models')
 
 
 const findAll = (req,res) =>{
-    Post.findAll().then(posts => {
+    Post.findAll({
+        order: sequelize.literal('createdAt DESC')
+    }).then(posts => {
         res.send(posts)
     })
 }

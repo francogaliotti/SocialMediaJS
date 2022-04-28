@@ -5,12 +5,28 @@ import axios from 'axios'
 function Post() {
     let { id } = useParams()
     const [postObject, setPostObject] = useState({})
+    const [comments, setComments] = useState([])
+    const [newComment, setNewComment] = useState("")
 
     useEffect(() => {
         axios.get(`http://localhost:8080/posts/${id}`).then((res) => {
             setPostObject(res.data)
         })
+        axios.get(`http://localhost:8080/comments/${id}`).then((res) => {
+            setComments(res.data)
+        })
     }, [])
+
+    const addComment = () => {
+        axios.post(`http://localhost:8080/comments`, {
+            'commentBody': newComment,
+            'PostId': postObject.id
+        }).then((res) => {
+            const commentToAdd = {commentBody: newComment}
+            setComments([commentToAdd,...comments])
+            setNewComment("")
+        })
+    }
 
     return (
         <div className="postPage">
@@ -28,7 +44,19 @@ function Post() {
                 </div>
             </div>
             <div className="rightSide">
-                Comment section
+                <div className='addCommentContainer'>
+                    <textarea
+                        placeholder='Comment...'
+                        autoComplete='off'
+                        onChange={(e) => { setNewComment(e.target.value) }}
+                        value={newComment} />
+                    <button onClick={addComment}>Add Comment</button>
+                </div>
+                <div className='listOfComments'>
+                    {comments.map((comment, key) => {
+                        return <div key={key} className='comment'>{comment.commentBody}</div>
+                    })}
+                </div>
             </div>
         </div>
     )

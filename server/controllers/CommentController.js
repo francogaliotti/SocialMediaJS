@@ -1,5 +1,5 @@
 const express = require('express')
-const {Post, Comment} = require('../models')
+const {Post, Comment, sequelize} = require('../models')
 
 
 const findByPost = (req, res) =>{
@@ -8,7 +8,8 @@ const findByPost = (req, res) =>{
         Comment.findAll({
             where:{
                 PostId: post.id
-            }
+            },
+            order: sequelize.literal('createdAt DESC')
         }).then(comment => {
             res.send(comment)
         })
