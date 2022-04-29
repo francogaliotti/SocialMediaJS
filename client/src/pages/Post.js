@@ -9,10 +9,18 @@ function Post() {
     const [newComment, setNewComment] = useState("")
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/posts/${id}`).then((res) => {
+        axios.get(`http://localhost:8080/posts/${id}`, {
+            headers:{
+                accessToken: sessionStorage.getItem("accessToken")
+            }
+        }).then((res) => {
             setPostObject(res.data)
         })
-        axios.get(`http://localhost:8080/comments/${id}`).then((res) => {
+        axios.get(`http://localhost:8080/comments/${id}`, {
+            headers:{
+                accessToken: sessionStorage.getItem("accessToken")
+            }
+        }).then((res) => {
             setComments(res.data)
         })
     }, [])
@@ -21,6 +29,10 @@ function Post() {
         axios.post(`http://localhost:8080/comments`, {
             'commentBody': newComment,
             'PostId': postObject.id
+        }, {
+            headers:{
+                accessToken: sessionStorage.getItem("accessToken")
+            }
         }).then((res) => {
             const commentToAdd = {commentBody: newComment}
             setComments([commentToAdd,...comments])

@@ -8,7 +8,11 @@ function Home() {
     let navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:8080/posts').then((res) => {
+        axios.get('http://localhost:8080/posts', {
+            headers:{
+                accessToken: sessionStorage.getItem("accessToken")
+            }
+        }).then((res) => {
             setListOfPosts(res.data)
         })
     }, [])

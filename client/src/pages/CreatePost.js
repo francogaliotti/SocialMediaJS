@@ -12,7 +12,11 @@ function CreatePost() {
         username:""
     }
     const onSubmit = (data) =>{
-        axios.post('http://localhost:8080/posts', data).then((res) => {
+        axios.post('http://localhost:8080/posts', data, {
+            headers:{
+                accessToken: sessionStorage.getItem("accessToken")
+            }
+        }).then((res) => {
             navigate(`/`)
         })
     }
