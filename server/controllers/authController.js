@@ -58,9 +58,14 @@ const login = (req, res) => {
     })
 }
 
+const validateToken = (req,res) =>{
+    res.json(req.user)
+}
+
 
 module.exports={
     register,
-    login
+    login,
+    validateToken
 }
 

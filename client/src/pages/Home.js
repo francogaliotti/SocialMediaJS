@@ -10,7 +10,7 @@ function Home() {
     useEffect(() => {
         axios.get('http://localhost:8080/posts', {
             headers:{
-                accessToken: sessionStorage.getItem("accessToken")
+                accessToken: localStorage.getItem("accessToken")
             }
         }).then((res) => {
             setListOfPosts(res.data)

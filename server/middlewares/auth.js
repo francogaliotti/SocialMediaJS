@@ -14,7 +14,8 @@ module.exports = (req, res, next) => {
                     error: "Internal server error"
                 })
             } else {
-                //req.user = decoded
+                req.user = decoded.user
+                //console.log(decoded.user.username)
                 next()
             }
         })

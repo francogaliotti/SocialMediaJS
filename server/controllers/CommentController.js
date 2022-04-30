@@ -21,10 +21,12 @@ const findByPost = (req, res) =>{
 }
 const createComment =(req,res) =>{
     const postId = req.body.PostId
+    const username = req.user.username
     Post.findByPk(postId).then(post => {
         Comment.create({
             commentBody: req.body.commentBody,
-            PostId: post.id
+            PostId: post.id,
+            username: username
         }).then(comment => {
             res.send(comment)
         })

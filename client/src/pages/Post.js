@@ -11,14 +11,14 @@ function Post() {
     useEffect(() => {
         axios.get(`http://localhost:8080/posts/${id}`, {
             headers:{
-                accessToken: sessionStorage.getItem("accessToken")
+                accessToken: localStorage.getItem("accessToken")
             }
         }).then((res) => {
             setPostObject(res.data)
         })
         axios.get(`http://localhost:8080/comments/${id}`, {
             headers:{
-                accessToken: sessionStorage.getItem("accessToken")
+                accessToken: localStorage.getItem("accessToken")
             }
         }).then((res) => {
             setComments(res.data)
@@ -31,10 +31,10 @@ function Post() {
             'PostId': postObject.id
         }, {
             headers:{
-                accessToken: sessionStorage.getItem("accessToken")
+                accessToken: localStorage.getItem("accessToken")
             }
         }).then((res) => {
-            const commentToAdd = {commentBody: newComment}
+            const commentToAdd = res.data
             setComments([commentToAdd,...comments])
             setNewComment("")
         })
@@ -66,7 +66,9 @@ function Post() {
                 </div>
                 <div className='listOfComments'>
                     {comments.map((comment, key) => {
-                        return <div key={key} className='comment'>{comment.commentBody}</div>
+                        return <div key={key} className='comment'>{comment.commentBody}
+                        <label>{comment.username}</label>
+                        </div>
                     })}
                 </div>
             </div>
