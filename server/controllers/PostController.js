@@ -6,8 +6,15 @@ const findAll = (req,res) =>{
     Post.findAll({
         order: sequelize.literal('createdAt DESC'),
         include: [Like]
-    }).then(posts => {
-        res.send(posts)
+    }).then(listOfPosts => {
+        Like.findAll({
+            where: {UserId: req.user.id}
+        }).then(likedPosts => {
+            res.json({
+                listOfPosts: listOfPosts,
+                likedPosts: likedPosts
+            })
+        })
     }).catch(err => {
         console.log(err)
     })
