@@ -15,8 +15,12 @@ function Login() {
         }).then((res)=>{
             localStorage.setItem("accessToken", res.data.token)
             localStorage.setItem("username", res.data.user.username)
-            setAuthState(true)
-            console.log(res)
+            setAuthState({
+                username: res.data.user.username,
+                id: res.data.user.id,
+                status: true
+              })
+            console.log(res.data.user.id)
             navigate(`/`)
         }).catch((err)=>{
             console.log(err)

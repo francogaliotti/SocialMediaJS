@@ -1,12 +1,12 @@
 const express = require('express')
-const {Post, Comment, sequelize} = require('../models')
+const { Post, Comment, sequelize } = require('../models')
 
 
-const findByPost = (req, res) =>{
+const findByPost = (req, res) => {
     const postId = req.params.postId
     Post.findByPk(postId).then(post => {
         Comment.findAll({
-            where:{
+            where: {
                 PostId: post.id
             },
             order: sequelize.literal('createdAt DESC')
@@ -19,7 +19,7 @@ const findByPost = (req, res) =>{
         })
     })
 }
-const createComment =(req,res) =>{
+const createComment = (req, res) => {
     const postId = req.body.PostId
     const username = req.user.username
     Post.findByPk(postId).then(post => {
@@ -37,8 +37,22 @@ const createComment =(req,res) =>{
     })
 }
 
+const deleteComment = (req, res) => {
+    const id = req.params.id
+    Comment.destroy({
+        where: {
+            id: id
+        }
+    }).then((comment) => {
+        res.json("comment destroyed")
+    }).catch(err => {
+        res.status(500).json(err)
+    })
+}
 
-module.exports={
+
+module.exports = {
     findByPost,
-    createComment
+    createComment,
+    deleteComment
 }

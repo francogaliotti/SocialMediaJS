@@ -17,6 +17,8 @@ const commentRoutes = require('./routes/CommentRoutes')
 app.use('/comments', commentRoutes)
 const userRoutes = require('./routes/authRoutes')
 app.use('/auth', userRoutes)
+const likeRoutes = require('./routes/LikeRoutes')
+app.use('/likes', likeRoutes)
 
 //server
 db.sequelize.sync().then(() => {

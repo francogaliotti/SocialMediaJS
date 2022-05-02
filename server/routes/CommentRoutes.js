@@ -5,7 +5,7 @@ const auth = require('../middlewares/auth')
 
 router.get('/:postId', auth, commentController.findByPost)
 router.post('/', auth, commentController.createComment)
-
+router.delete('/:id', auth, commentController.deleteComment)
 
 
 module.exports = router

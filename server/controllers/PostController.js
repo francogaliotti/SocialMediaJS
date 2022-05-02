@@ -1,10 +1,11 @@
 const express = require('express')
-const {Post, sequelize} = require('../models')
+const {Post, Like, sequelize} = require('../models')
 
 
 const findAll = (req,res) =>{
     Post.findAll({
-        order: sequelize.literal('createdAt DESC')
+        order: sequelize.literal('createdAt DESC'),
+        include: [Like]
     }).then(posts => {
         res.send(posts)
     }).catch(err => {
@@ -23,7 +24,8 @@ const createPost = (req,res) =>{
     Post.create({
         title: req.body.title,
         postText: req.body.postText,
-        username: req.body.username
+        username: req.body.username,
+        UserId: req.user.id
     }).then(post => {
         res.json(post)
     })
