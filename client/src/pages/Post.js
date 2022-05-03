@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../helpers/authContext'
+import DeleteIcon from '@material-ui/icons/Delete';
 
 function Post() {
     let { id } = useParams()
@@ -87,7 +88,7 @@ function Post() {
                             </div>
                             <div className='comment-footer'>
                                 <label> {comment.username}</label>
-                                {authState.username === comment.username && <button onClick={() => deleteComment(comment.id)}> Delete</button>}
+                                {authState.username === comment.username && <DeleteIcon className='deleteIcon' onClick={() => deleteComment(comment.id)}/> }
                             </div>
                         </div>
                     })}

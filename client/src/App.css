@@ -81,6 +81,10 @@ body{
   color: white;
 }
 
+.likeBttn:hover{
+  color: #a10;
+}
+
 /* CREATE POST PAGE CSS */
 
 .createPostPage {
@@ -319,21 +323,22 @@ span {
 .comment .comment-footer{
   background-color: #d40;
   padding-left: 8px;
-  padding-top: 5px;
+  padding-top: 10px;
   padding-bottom: 5px;
 }
-.comment .comment-footer button{
+
+.comment .comment-footer .deleteIcon{
   float: right;
   margin-right: 5px;
-  background-color: #c30;
   border-radius: 8px;
   cursor: pointer;
   color: #fff;
-  border-style: groove;
+  font-size: 150%;
+  margin-top: -3px;
 }
 
-.comment .comment-footer button:hover{
-  background-color: #a10;
+.comment .comment-footer .deleteIcon:hover{
+  color: #a10;
 }
 
 /* LOGIN */
