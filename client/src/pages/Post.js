@@ -1,15 +1,19 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../helpers/authContext'
 import DeleteIcon from '@material-ui/icons/Delete';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
 function Post() {
     let { id } = useParams()
     const [postObject, setPostObject] = useState({})
+    const [postLikes, setPostLikes] = useState([])
     const [comments, setComments] = useState([])
     const [newComment, setNewComment] = useState("")
     const { authState } = useContext(AuthContext)
+    let navigate = useNavigate();
+
     useEffect(() => {
         axios.get(`http://localhost:8080/posts/${id}`, {
             headers: {
@@ -17,6 +21,10 @@ function Post() {
             }
         }).then((res) => {
             setPostObject(res.data)
+            const likes = res.data.Likes
+            setPostLikes(likes.map(like => {
+                return like.UserId
+            }))
         })
         axios.get(`http://localhost:8080/comments/${id}`, {
             headers: {
@@ -56,6 +64,34 @@ function Post() {
         })
     }
 
+    const deletePost = (postId) => {
+        axios.delete(`http://localhost:8080/posts/${postId}`, {
+            headers: {
+                accessToken: localStorage.getItem("accessToken")
+            }
+        }).then(res => {
+            navigate('/')
+        })
+    }
+
+    const likePost = (postId) => {
+        axios.post('http://localhost:8080/likes', {
+            PostId: postId
+        }, {
+            headers: {
+                accessToken: localStorage.getItem("accessToken")
+            }
+        }).then(res => {
+            if (res.data.liked) {
+                setPostLikes([...postLikes, authState.id])
+            } else {
+                setPostLikes(postLikes.filter(id => {
+                    return id !== authState.id
+                }))
+            }
+        })
+    }
+
     return (
         <div className="postPage">
             <div className="leftSide">
@@ -67,7 +103,22 @@ function Post() {
                         {postObject.postText}
                     </div>
                     <div className='footer'>
-                        {postObject.username}
+                        <div className="username">{postObject.username}</div>
+                        <div className="buttons">
+                            <ThumbUpAltIcon
+                                onClick={() => {
+                                    likePost(postObject.id);
+                                }}
+                                className={postLikes.includes(authState.id) ? "unlikeBttn" : "likeBttn"}
+                            />
+                            <label> {postLikes.length}</label>
+                            {authState.username === postObject.username &&
+                                <DeleteIcon className='deleteIcon'
+                                    onClick={() => {
+                                        deletePost(postObject.id)
+                                    }}
+                                />}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,7 +139,7 @@ function Post() {
                             </div>
                             <div className='comment-footer'>
                                 <label> {comment.username}</label>
-                                {authState.username === comment.username && <DeleteIcon className='deleteIcon' onClick={() => deleteComment(comment.id)}/> }
+                                {authState.username === comment.username && <DeleteIcon className='deleteIcon' onClick={() => deleteComment(comment.id)} />}
                             </div>
                         </div>
                     })}

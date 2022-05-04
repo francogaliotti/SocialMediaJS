@@ -22,7 +22,9 @@ const findAll = (req,res) =>{
 
 const findById = (req,res) =>{
     const id = req.params.id
-    Post.findByPk(id).then(post => {
+    Post.findByPk(id,{
+        include: [Like]
+    }).then(post => {
         res.send(post)
     })
 }
@@ -31,7 +33,7 @@ const createPost = (req,res) =>{
     Post.create({
         title: req.body.title,
         postText: req.body.postText,
-        username: req.body.username,
+        username: req.user.username,
         UserId: req.user.id
     }).then(post => {
         res.json(post)
