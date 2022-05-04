@@ -84,7 +84,9 @@ function Home() {
                     {post.postText}
                 </div>
                 <div className='footer'>
-                    <div className="username">{post.username}</div>
+                    <div className="username" onClick={() => navigate(`/profile/${post.UserId}`)}>
+                        <label>{post.username}</label>
+                        </div>
                     <div className="buttons">
                         <ThumbUpAltIcon
                             onClick={() => {

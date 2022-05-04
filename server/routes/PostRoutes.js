@@ -7,6 +7,7 @@ router.get('/', auth, postsController.findAll)
 router.post('/', auth, postsController.createPost)
 router.delete('/:id', auth, postsController.deletePost)
 router.get('/:id', auth, postsController.findById)
+router.get('/user/:id', auth, postsController.findByUserId)
 
 
 module.exports = router

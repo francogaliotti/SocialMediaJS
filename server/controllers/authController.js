@@ -62,10 +62,21 @@ const validateToken = (req,res) =>{
     res.json(req.user)
 }
 
+const getUser = async (req,res) => {
+    const id = req.params.id
+    const info = await User.findByPk(id,{
+        attributes: {
+            exclude: ['password']
+        }
+    })
+    res.json(info)
+}
+
 
 module.exports={
     register,
     login,
-    validateToken
+    validateToken,
+    getUser
 }
 

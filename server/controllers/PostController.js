@@ -29,6 +29,28 @@ const findById = (req,res) =>{
     })
 }
 
+const findByUserId = (req,res) => {
+    const id = req.params.id
+    Post.findAll({
+        where:{
+            UserId: id
+        },
+        order: sequelize.literal('createdAt DESC'),
+        include: [Like]
+    }).then(listOfPosts => {
+        Like.findAll({
+            where: {UserId: req.user.id}
+        }).then(likedPosts => {
+            res.json({
+                listOfPosts: listOfPosts,
+                likedPosts: likedPosts
+            })
+        })
+    }).catch(err => {
+        console.log(err)
+    })
+}
+
 const createPost = (req,res) =>{
     Post.create({
         title: req.body.title,
@@ -61,5 +83,6 @@ module.exports={
     findAll,
     createPost,
     deletePost,
-    findById
+    findById,
+    findByUserId
 }

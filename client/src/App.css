@@ -65,20 +65,30 @@ body{
 .footer .username {
   flex: 50%;
 }
+
+.footer .username label{
+  cursor: pointer;
+}
+
+.footer .username label:hover{
+  color: #a10;
+}
+
 .footer .buttons {
   flex: 50%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  cursor: pointer;
   margin-right: 10px;
 }
 
 .likeBttn {
-  color: #fff
+  color: #fff;
+  cursor: pointer;
 }
 .unlikeBttn {
   color: #a10;
+  cursor: pointer;
 }
 
 .likeBttn:hover{
@@ -87,6 +97,7 @@ body{
 
 .deleteIcon:hover{
   color: #a10;
+  cursor: pointer;
 }
 
 /* CREATE POST PAGE CSS */
@@ -184,6 +195,11 @@ span {
   margin-left: 20px;
   text-decoration: none;
   color: white;
+}
+
+.navbar h1:hover {
+  cursor: pointer;
+  color: #000
 }
 
 .navbar a:hover {
@@ -390,4 +406,12 @@ span {
 .loginContainer button:hover{
   background-color: #c30;
   cursor: pointer;
+}
+/*PROFILE PAGE*/
+
+.basicInfo{
+  margin-top: 70px;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f60;
 }
