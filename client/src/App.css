@@ -409,9 +409,20 @@ span {
 }
 /*PROFILE PAGE*/
 
+.profilePageContainer{
+  width: 80%;
+}
+
+.profilePageContainer .listOfPosts{
+  margin-left: 25%;
+}
+
 .basicInfo{
-  margin-top: 70px;
+  margin-top: 40px;
   border-radius: 8px;
   padding: 10px;
-  background-color: #f60;
+  color:#c30;
+  background-color: #222;
+  padding-left: 30%;
+  border: 2px solid #b20
 }
