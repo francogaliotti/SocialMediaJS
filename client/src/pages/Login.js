@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import {AuthContext} from '../helpers/authContext'
+import Swal from 'sweetalert2'
 
 function Login() {
     let navigate = useNavigate();
@@ -23,7 +24,17 @@ function Login() {
             console.log(res.data.user.id)
             navigate(`/`)
         }).catch((err)=>{
-            console.log(err)
+            if(err.response.data.error == "Incorrect password"){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Incorrect password!'
+                  })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: "Username doesn't exist!"
+                  })
+            }
         })
     }
     

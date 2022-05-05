@@ -4,6 +4,7 @@ import axios from 'axios'
 import { AuthContext } from '../helpers/authContext'
 import DeleteIcon from '@material-ui/icons/Delete';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import Swal from 'sweetalert2'
 
 function Post() {
     let { id } = useParams()
@@ -92,14 +93,66 @@ function Post() {
         })
     }
 
+    const editPost = (option) => {
+        if (option === "title") {
+            Swal.fire({
+                title: "Edit your title",
+                input: 'text',
+                inputValue: postObject.title,
+                showCancelButton: true
+            }).then((result) => {
+                if(result.value){
+                    axios.put(`http://localhost:8080/posts/title/${id}`, {
+                    newTitle: result.value
+                }, {
+                    headers: {
+                        accessToken: localStorage.getItem("accessToken")
+                    }
+                }).then(res => {
+                    setPostObject({...postObject, title: result.value})
+                })
+                }
+                
+            });
+        } else {
+            Swal.fire({
+                title: "Edit your post body",
+                input: 'textarea',
+                inputValue: postObject.postText,
+                showCancelButton: true
+            }).then((result) => {
+                if (result.value) {
+                    axios.put(`http://localhost:8080/posts/body/${id}`, {
+                        newPostText: result.value
+                    }, {
+                        headers: {
+                            accessToken: localStorage.getItem("accessToken")
+                        }
+                    }).then(res => {
+                        setPostObject({...postObject, postText: result.value})
+                    })
+                }
+               
+            });
+        }
+    }
+
     return (
         <div className="postPage">
             <div className="leftSide">
                 <div className='post' key={postObject.id} id="individual">
-                    <div className='title'>
+                    <div className='title' onClick={() => {
+                        if (authState.id === postObject.UserId) {
+                            editPost("title")
+                        }
+                    }}>
                         {postObject.title}
                     </div>
-                    <div className='body'>
+                    <div className='body' onClick={() => {
+                        if (authState.id === postObject.UserId) {
+                            editPost("body")
+                        }
+                    }}>
                         {postObject.postText}
                     </div>
                     <div className='footer'>

@@ -3,6 +3,7 @@ import axios from "axios"
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 function Register() {
     let navigate = useNavigate();
@@ -20,7 +21,12 @@ function Register() {
         axios.post('http://localhost:8080/auth/register', data).then((res) => {
             navigate(`/`)
         }).catch(err => {
-            console.log(err)
+            Swal.fire({
+                icon: 'error',
+                title: 'The username or the email already exist!',
+                text: 'Try another values'
+              })
+            
         })
     }
     return (

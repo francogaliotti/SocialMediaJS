@@ -1,14 +1,14 @@
 const express = require('express')
-const {Post, Like, sequelize} = require('../models')
+const { Post, Like, sequelize } = require('../models')
 
 
-const findAll = (req,res) =>{
+const findAll = (req, res) => {
     Post.findAll({
         order: sequelize.literal('createdAt DESC'),
         include: [Like]
     }).then(listOfPosts => {
         Like.findAll({
-            where: {UserId: req.user.id}
+            where: { UserId: req.user.id }
         }).then(likedPosts => {
             res.json({
                 listOfPosts: listOfPosts,
@@ -20,26 +20,26 @@ const findAll = (req,res) =>{
     })
 }
 
-const findById = (req,res) =>{
+const findById = (req, res) => {
     const id = req.params.id
-    Post.findByPk(id,{
+    Post.findByPk(id, {
         include: [Like]
     }).then(post => {
         res.send(post)
     })
 }
 
-const findByUserId = (req,res) => {
+const findByUserId = (req, res) => {
     const id = req.params.id
     Post.findAll({
-        where:{
+        where: {
             UserId: id
         },
         order: sequelize.literal('createdAt DESC'),
         include: [Like]
     }).then(listOfPosts => {
         Like.findAll({
-            where: {UserId: req.user.id}
+            where: { UserId: req.user.id }
         }).then(likedPosts => {
             res.json({
                 listOfPosts: listOfPosts,
@@ -51,7 +51,7 @@ const findByUserId = (req,res) => {
     })
 }
 
-const createPost = (req,res) =>{
+const createPost = (req, res) => {
     Post.create({
         title: req.body.title,
         postText: req.body.postText,
@@ -79,10 +79,28 @@ const deletePost = (req, res) => {
     })
 }
 
-module.exports={
+const updatePostTitle = (req, res) => {
+    const newTitle = req.body.newTitle
+    Post.update({ title: newTitle }, { where: { id: req.params.id } }).then(post => {
+        res.json(post)
+    }
+    )
+}
+
+const updatePostBody = (req, res) => {
+    const newPostText = req.body.newPostText
+    Post.update({ postText: newPostText }, { where: { id: req.params.id } }).then(post => {
+        res.json(post)
+    }
+    )
+}
+
+module.exports = {
     findAll,
     createPost,
     deletePost,
     findById,
-    findByUserId
+    findByUserId,
+    updatePostTitle,
+    updatePostBody
 }

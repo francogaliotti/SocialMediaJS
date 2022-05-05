@@ -215,7 +215,7 @@ span {
   margin-right: 10px;
   background-color: #c30;
   border-radius: 10px;
-  border-style: groove;
+  border: 2px solid #000
 }
 
 .navbar h1 {
@@ -278,9 +278,10 @@ span {
   font-size: 140%;
 }
 
-#individual .body:hover {
+#individual .body:hover,
+#individual .title:hover {
   box-shadow: none;
-  cursor:auto;
+  cursor: pointer;
 }
 
 .rightSide .addCommentContainer {
