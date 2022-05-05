@@ -81,6 +81,9 @@ function Profile() {
             <div className='basicInfo'>
                 <h1> Username: {username}</h1>
                 <h2> Email: {email}</h2>
+                {authState.username === username &&
+                    <button onClick={()=>{navigate('/changepassword')}}> Change Password</button>
+                }
             </div>
             <div className='listOfPosts'>
                 <div>{listOfPosts.map((post, key) => {

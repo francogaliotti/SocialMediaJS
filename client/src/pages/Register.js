@@ -23,9 +23,9 @@ function Register() {
         }).catch(err => {
             Swal.fire({
                 icon: 'error',
-                title: 'The username or the email already exist!',
-                text: 'Try another values'
+                title: err.response.data.err.errors[0].message
               })
+              console.log(err)
             
         })
     }

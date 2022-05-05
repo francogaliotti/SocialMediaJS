@@ -1,4 +1,4 @@
-body{
+body {
   background-color: #111;
 }
 
@@ -31,6 +31,7 @@ body{
 .post .body:hover {
   cursor: pointer;
 }
+
 .post .title {
   flex: 20%;
   border-top-right-radius: 10px;
@@ -66,11 +67,11 @@ body{
   flex: 50%;
 }
 
-.footer .username label{
+.footer .username label {
   cursor: pointer;
 }
 
-.footer .username label:hover{
+.footer .username label:hover {
   color: #a10;
 }
 
@@ -86,16 +87,17 @@ body{
   color: #fff;
   cursor: pointer;
 }
+
 .unlikeBttn {
   color: #a10;
   cursor: pointer;
 }
 
-.likeBttn:hover{
+.likeBttn:hover {
   color: #a10;
 }
 
-.deleteIcon:hover{
+.deleteIcon:hover {
   color: #a10;
   cursor: pointer;
 }
@@ -110,6 +112,7 @@ body{
   justify-content: center;
   align-items: center;
 }
+
 .formContainer {
   display: flex;
   flex-direction: column;
@@ -156,7 +159,7 @@ body{
   background-color: #c30;
 }
 
-label{
+label {
   color: #fff;
 }
 
@@ -167,9 +170,12 @@ span {
 /* NAVBAR */
 
 .navbar {
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
+  position: fixed;
+  /* Set the navbar to fixed position */
+  top: 0;
+  /* Position the navbar at the top of the page */
+  width: 100%;
+  /* Full width */
   height: 70px;
   background-color: #f60;
   display: flex;
@@ -191,6 +197,7 @@ span {
   justify-content: flex-end;
   align-items: center;
 }
+
 .navbar a {
   margin-left: 20px;
   text-decoration: none;
@@ -226,7 +233,7 @@ span {
   font-size: 150%;
 }
 
-.navbar button:hover{
+.navbar button:hover {
   background-color: #a10;
 }
 
@@ -312,7 +319,7 @@ span {
   border: none;
 }
 
-.addCommentContainer button:hover{
+.addCommentContainer button:hover {
   background-color: #c30;
   cursor: pointer;
 }
@@ -332,30 +339,30 @@ span {
 .listOfComments .comment {
   width: 70%;
   height: auto;
-  
+
   border: 1px solid #f60;
   color: #fff;
-  
+
   border-radius: 5px;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
 }
 
-.comment .comment-body{
+.comment .comment-body {
   background-color: #222;
   padding: 30px;
   border-radius: 5px 5px 0 0;
 }
 
-.comment .comment-footer{
+.comment .comment-footer {
   background-color: #d40;
   padding-left: 8px;
   padding-top: 10px;
   padding-bottom: 5px;
 }
 
-.comment .comment-footer .deleteIcon{
+.comment .comment-footer .deleteIcon {
   float: right;
   margin-right: 5px;
   border-radius: 8px;
@@ -365,7 +372,7 @@ span {
   margin-top: -3px;
 }
 
-.comment .comment-footer .deleteIcon:hover{
+.comment .comment-footer .deleteIcon:hover {
   color: #a10;
 }
 
@@ -382,6 +389,11 @@ span {
   padding: 20px;
   border: 5px solid #f60;
   border-radius: 5px;
+}
+
+.loginContainer h1 {
+  color: #fff;
+  text-align: center;
 }
 
 .loginContainer input {
@@ -404,26 +416,44 @@ span {
   margin-top: 15px;
 }
 
-.loginContainer button:hover{
+.loginContainer button:hover {
   background-color: #c30;
   cursor: pointer;
 }
+
 /*PROFILE PAGE*/
 
-.profilePageContainer{
+.profilePageContainer {
   width: 80%;
 }
 
-.profilePageContainer .listOfPosts{
+.profilePageContainer .listOfPosts {
   margin-left: 25%;
 }
 
-.basicInfo{
+.basicInfo {
   margin-top: 40px;
   border-radius: 8px;
   padding: 10px;
-  color:#c30;
+  color: #c30;
   background-color: #222;
   padding-left: 30%;
   border: 2px solid #b20
+}
+
+.basicInfo button {
+  background-color: transparent;
+  color: #c30;
+  width: 150px;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px solid #c30;
+  float: right;
+  margin-top: -40px;
+}
+
+.basicInfo button:hover {
+  background-color: #c30;
+  color: #000;
+  cursor: pointer;
 }

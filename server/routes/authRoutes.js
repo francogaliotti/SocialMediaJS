@@ -7,6 +7,7 @@ routes.post('/register', authController.register)
 routes.post('/login', authController.login)
 routes.get('/', auth, authController.validateToken)
 routes.get('/info/:id', auth, authController.getUser)
+routes.put('/changepassword', auth, authController.changePassword)
 
 
 

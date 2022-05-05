@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import PageNotFound from './pages/PageNotFound'
 import Profile from './pages/Profile'
+import ChangePassword from './pages/ChangePassword'
 import { AuthContext } from './helpers/authContext'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
@@ -80,6 +81,7 @@ function App() {
           <Route path="/post/:id" element={<Post />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </AuthContext.Provider>

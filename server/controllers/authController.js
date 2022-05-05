@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const express = require('express');
-const {User, sequelize} = require('../models')
+const { User, sequelize } = require('../models')
 const jwt = require('jsonwebtoken')
 const auth = require('../config/auth')
 
@@ -21,9 +21,11 @@ const register = (req, res) => {
             })*/
             res.json("Welcome!")
         }).catch(err => {
-            res.status(500).json(err)
+            res.status(500).json({
+                err
+            })
         })
-    }else{
+    } else {
         res.status(400).json({
             error: "The password must be at least 4 characters"
         })
@@ -32,13 +34,13 @@ const register = (req, res) => {
 }
 
 const login = (req, res) => {
-    let {username, password} = req.body;
+    let { username, password } = req.body;
     User.findOne({
         where: {
             username: username
         }
     }).then(user => {
-        if(bcrypt.compareSync(password, user.password)){
+        if (bcrypt.compareSync(password, user.password)) {
             let token = jwt.sign({ user: user }, auth.secret, {
                 expiresIn: auth.expires
             });
@@ -46,7 +48,7 @@ const login = (req, res) => {
                 user: user,
                 token: token
             })
-        }else{
+        } else {
             res.status(401).json({
                 error: "Incorrect password"
             })
@@ -58,13 +60,13 @@ const login = (req, res) => {
     })
 }
 
-const validateToken = (req,res) =>{
+const validateToken = (req, res) => {
     res.json(req.user)
 }
 
-const getUser = async (req,res) => {
+const getUser = async (req, res) => {
     const id = req.params.id
-    const info = await User.findByPk(id,{
+    const info = await User.findByPk(id, {
         attributes: {
             exclude: ['password']
         }
@@ -72,11 +74,32 @@ const getUser = async (req,res) => {
     res.json(info)
 }
 
+const changePassword = async (req, res) => {
+    const { oldPassword, newPassword } = req.body
+    const user = await User.findOne({ where: { username: req.user.username } })
+    if (newPassword.length >= 4) {
+        if (bcrypt.compareSync(oldPassword, user.password)) {
+            const hash = bcrypt.hashSync(newPassword, auth.rounds)
+            await User.update({ password: hash }, { where: { id: req.user.id } })
+            res.json("Password changed")
+        } else {
+            res.status(401).json({
+                error: "Incorrect old password"
+            })
+        }
+    } else {
+        res.status(400).json({
+            error: "The new password must be at least 4 characters"
+        })
+    }
+}
 
-module.exports={
+
+module.exports = {
     register,
     login,
     validateToken,
-    getUser
+    getUser,
+    changePassword
 }
 
